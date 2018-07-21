@@ -1,42 +1,46 @@
 '''
-Created on Jul 9, 2018
+Created on Jul 10, 2018
 
 @author: yiyedang
 '''
 import turtle
 import random
 
-def draw_tree(branchLen, t):
-    if branchLen < 10:
-        return
-    elif branchLen > 10 and branchLen < 12:
-        t.color("darkgreen")
-        t.forward(branchLen)
-        t.left(30)
-        draw_tree(3 * branchLen / 4, t)
-        t.right(60)
-        draw_tree(3 * branchLen / 4, t)
-        t.left(30)
-        t.up()
-        t.backward(branchLen)
-        t.down()
-    else:
+def tree(branchLen,t, pen):
+    if branchLen > 20:
+        t.pensize(pen)
+        pen = pen - 1
         t.color("brown")
+        sub = random.randrange(10,15)
+        angle = random.randrange(10,45)
         t.forward(branchLen)
-        t.left(30)
-        draw_tree(3 * branchLen / 4, t)
-        t.right(60)
-        draw_tree(3 * branchLen / 4, t)
-        t.left(30)
+        t.right(angle)
+        tree(branchLen-sub,t, pen)
+        t.left(angle*2)
+        tree(branchLen-sub,t, pen)
+        t.right(angle)
         t.up()
         t.backward(branchLen)
         t.down()
-        
-t = turtle.Turtle()
-wn = turtle.Screen()
-t.speed(10)
-t.left(90)
-t.backward(100)
-draw_tree(100, t)
+    elif (branchLen > 5) and (branchLen < 20):
+        t.pensize(pen)
+        t.color("darkgreen")
+        pen = pen - 1
+        t.forward(branchLen)
+        t.up()
+        t.backward(branchLen)
+        t.down()
 
-wn.exitonclick()
+def main():
+    t = turtle.Turtle()
+    myWin = turtle.Screen()
+    t.speed(10)
+    t.left(90)
+    t.up()
+    t.backward(200)
+    t.down()
+    t.color("brown")
+    tree(100, t, 8)
+    myWin.exitonclick()
+
+main()
