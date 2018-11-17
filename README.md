@@ -1,2 +1,2 @@
 # tree-drawings
-Draw 2D real-world tree using Python
+Draw random 2D graphic tree designs using Python
